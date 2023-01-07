@@ -1,0 +1,150 @@
+{% extends 'adminindex.html' %}
+
+{%block title%} Orphan {%endblock title%}
+
+{%block navbar%}
+            <nav class="site-navigation text-left ml-auto " role="navigation">
+              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                <li ><a  href="/adminindex" class="nav-link">AdminHome</a></li>
+                <li><a class="active" href="/orphan" class="nav-link">Orphon</a></li>
+                <li><a href="/donor" class="nav-link">Donor</a></li>
+                <li><a href="/employee" class="nav-link">Employee</a></li>
+                <li><a href="/adoption" class="nav-link">Adoption</a></li>
+                <li><a href="/medical" class="nav-link">Medical</a></li>
+                <li><a href="/inventory" class="nav-link">Inventory</a></li>
+                <li ><a href="/adminlogin" class="nav-link">Logout</a></li>
+
+              </ul>
+              
+            </nav>
+{%endblock navbar%}
+
+
+
+{%block body%}
+
+<div class="row">
+    <div class="col-md-4">
+    
+    <a href="/orphan" class="btn btn-danger">Refresh</a></div>
+    
+    <div class="col-md-4">
+
+        <br>
+        <h1>CREATE ORPHAN</h1>
+        <br>
+{% include "message.html" %}
+    
+    
+    <form action="/orphan" method="post">
+    
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter Orphan ID" name="orphid" required>
+    </div>
+    
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter  Name" name="orphname" required>
+    </div>
+    
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter  AGE" name="orphage" required>
+    </div>
+
+    
+
+    <select class="form-control mt-2" id="orphgender" name="orphgender" required>
+        <option selected>Select Category</option>
+        <option value="none" selected>Gender</option>
+	    <option value="male">Male</option>
+	    <option value="female">Female</option>
+	    <option value="other">other</option>
+    </select>
+
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" placeholder="Enter Gaurdian Name" name="grdname" required>
+        </div>
+
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter Gaurdian Phone" name="grdphno" required>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" placeholder="Enter Gaurdian Address" name="grdaddr" required>
+        </div>
+
+    <br>
+    <button type="submit" class="btn btn-info">Add Data</button>
+    
+    </form>
+    
+    </div>
+    
+    
+    <div class="col-md-4"></div>
+    
+    </div>
+    
+    
+
+{% endblock body%}
+
+{% block display %}
+
+
+{% if allorphans|length==0 %}
+<div class="alert alert-danger" role="alert">
+    No Orphans. Add New Orphan Details
+</div>
+
+{% else %}
+
+<div class="card-body" style="background-image: url('static/assets/images/whitebg.jpg');" >
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+            <thead>
+                <tr>
+                    <th scope="col">Sno</th>
+                    <th scope="col">Orphan Name</th>
+                    <th scope="col">Orphan Age</th>
+                    <th scope="col">Orphan Gender</th>
+                    <th scope="col">Orphan's Gaurdian</th>
+                    <th scope="col">Actions</th>
+
+
+
+                </tr>
+            </thead>
+        
+        
+            <tbody>
+                {% for orphan in allorphans %}
+        
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{orphan.orphname}}</td>
+                    <td>{{orphan.orphage}}</td>
+                    <td>{{orphan.orphgender}}</td>
+                    
+
+                    <td>{{orphan.grdname}}</td>
+                    <td> <a href="/oedit/{{orphan.orphid}}" class="btn btn-primary btn-xs" >Edit</a>
+                         <a href="/odelete/{{orphan.orphid}}" class="btn btn-danger btn-xs">Delete</a>
+                    </td>
+
+        
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+    
+
+
+{% endif %}
+
+
+
+{% endblock display %}

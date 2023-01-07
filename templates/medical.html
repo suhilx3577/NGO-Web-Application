@@ -1,0 +1,149 @@
+{% extends 'adminindex.html' %}
+
+{%block title%} Medical {%endblock title%}
+
+{%block navbar%}
+            <nav class="site-navigation text-left ml-auto " role="navigation">
+              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                <li ><a  href="/adminindex" class="nav-link">AdminHome</a></li>
+                <li><a  href="/orphan" class="nav-link">Orphon</a></li>
+                <li><a href="/donor" class="nav-link">Donor</a></li>
+                <li><a href="/employee" class="nav-link">Employee</a></li>
+                <li><a href="/adoption" class="nav-link">Adoption</a></li>
+                <li><a class="active"  href="/medical" class="nav-link">Medical</a></li>
+                <li><a href="/inventory" class="nav-link">Inventory</a></li>
+                <li ><a href="/adminlogin" class="nav-link">Logout</a></li>
+
+              </ul>
+              
+            </nav>
+{%endblock navbar%}
+
+
+
+{%block body%}
+
+<div class="row">
+    <div class="col-md-4">
+    
+    <a href="/donor" class="btn btn-danger">Refresh</a></div>
+    
+    <div class="col-md-4">
+        <br>
+        <h1>ADD MEDICAL DETAILS</h1>
+        <br>
+{% include "message.html" %}
+    
+    
+    <form action="/medical" method="post">
+    
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter Orphan ID" name="orphid" required>
+    </div>
+    
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter Orphan Name" name="orphname" required>
+    </div>
+    
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter Hospital Name" name="hosname" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" placeholder="Enter Disease Cause" name="disease" required>
+        </div>
+
+    <div class="form-group">
+    <input type="text" class="form-control mt-2" placeholder="Enter Bill Expense" name="billexp" required>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" class="form-control mt-2" placeholder="Enter Medical Expense" name="mediexp" required>
+        </div>
+
+    <button type="submit" class="btn btn-info">Add Data</button>
+    
+    </form>
+    
+    </div>
+    
+    
+    <div class="col-md-4"></div>
+    
+    </div>
+
+    <br>
+    <br>
+
+    <br>
+    <br>
+
+    
+    
+
+{% endblock body%}
+
+{% block display%}
+
+
+<br>
+<br>
+
+<br>
+
+{% if allmedi|length==0 %}
+<div class="alert alert-danger" role="alert">
+    No Medical. Add New Medical Details
+</div>
+
+{% else %}
+
+<div class="card-body" style="background-image: url('static/assets/images/whitebg.jpg');" >
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+            <thead>
+                <tr>
+                    <th scope="col">Sno</th>
+                    <th scope="col">Orphan Name</th>
+                    <th scope="col">Hospital Name</th>
+                    <th scope="col">Disease Cause</th>
+                    <th scope="col">Bill Expense</th>
+                    <th scope="col">Medical Expense</th>
+
+
+
+
+                </tr>
+            </thead>
+        
+        
+            <tbody>
+                {% for medi in allmedi %}
+        
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{medi.orphname}}</td>
+                    <td>{{medi.hosname}}</td>
+
+                    <td>{{medi.disease}}</td>
+                    <td>{{medi.billexp}}</td>
+                    <td>{{medi.mediexp}}</td>
+
+
+                    
+
+        
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+    
+
+
+{% endif %}
+
+{% endblock display%}

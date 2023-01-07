@@ -1,0 +1,48 @@
+{% extends 'adminbase.html' %}
+
+
+{% block body %}
+
+
+<div class="container" height="100px">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-4"></div>
+        
+        <div class="col-md-4">
+        
+        
+        <form action="/adminsignup" method="post">
+        
+        {% include "message.html" %}
+        
+        <div class="form-group">
+        <input type="text" class="form-control mt-2" placeholder="Use Admin ID" name="adminid" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control mt-2" placeholder="Enter Admin Name" name="adminname" required>
+            </div>
+        
+        
+        <div class="form-group">
+        <input type="text" class="form-control mt-2" placeholder="Enter Password" name="adminpw" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-info">SignUp</button>
+        
+        </form>
+        
+        <a class="text-dark" href="/adminlogin">Login </a>
+        </div>
+        
+        
+        <div class="col-md-4"></div>
+        
+        </div>
+  
+
+</div>
+
+{% endblock body %}
